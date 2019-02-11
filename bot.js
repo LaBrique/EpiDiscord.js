@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
+
 const client = new Discord.Client();
+const Intranet = new require('intra-api');
+const intra = new Intranet("loginToken", "login");
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -20,6 +23,14 @@ client.on('message', message => {
             .then(message => {
                 message.delete(5000).catch(err => console.log(err));
             });
+        });
+    }
+    if (message.content == '!planning') {
+        intra.planning.get({ startDate: "2019-02-11", endDate: "2019-02-11"})
+        .then(res => {
+            for (var event in res)
+                console.log(res[event].acti_title);
+//            message.channel.send(res);
         });
     }
 });
