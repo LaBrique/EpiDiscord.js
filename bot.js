@@ -7,7 +7,7 @@ module.exports = new Discord.Collection();
 client.commands = new Discord.Collection();
 
 const Intranet = new require('intra-api');
-const intra = new Intranet("token", "token");
+const intra = new Intranet("auth-3cc16e13a95fc1433a0818e2c8500db5bdafcfec", "simon.perraud@epitech.eu");
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 client.on('ready', () => {
@@ -65,50 +65,6 @@ client.on('message', message => {
 		console.error(error);
 		message.channel.send(`there was an error trying to execute the command ${command.name}`);
 	}
-
-    if (message.content == '!delet') {
-        if (!message.member.hasPermission("MANAGE_MESSAGES")) {
-            message.channel.send('U NO **DELETIN**')
-            return;
-        }
-        message.channel.fetchMessages({ limit: 2 })
-        .then(messages => {
-            message.channel.bulkDelete(messages);
-            message.channel.send('**DELET**')
-            .then(message => {
-                message.delete(5000).catch(err => console.log(err));
-            });
-        });
-    }
-    if (message.content == '!planning') {
-        var date = new Date().slice(0, 10);
-        console.log(date);
-        intra.planning.get({/* startDate: "2019-02-11", endDate: "2019-02-11" */})
-        .then(res => {
-            for (var event in res)
-                console.log(res[event].acti_title);
-                // message.channel.send(res[event].acti_title);
-        });
-    }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 client.login(token);
