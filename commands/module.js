@@ -5,7 +5,8 @@ module.exports = {
 	category: 'Information',
 	name: 'module',
 	description: 'Récupère des infos sur les modules',
-	usage:'module',
+	usage:'module <scolarYear> <moduleCode> <instanceCode>',
+    args:['str', 'str', 'str'],
 	execute(intra, message, args) {
         var date = new Date();
         var today = date.getFullYear() + "-" + months[date.getMonth()] + "-" + date.getDate();

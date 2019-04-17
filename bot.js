@@ -31,29 +31,29 @@ client.on('message', message => {
 
     if (command.args) {
 		if (!args.length) {
-			reply += `:thinking: Ils sont où tes arguments?`;
+			reply += `Ils sont où tes arguments?`;
 		} else if (!command.flexible_args) {
 			if (command.args.length > args.length){
-				reply += `:thinking: Il te manque des arguments là!`;
+				reply += `Il te manque des arguments là!`;
 			} else if (command.args.length < args.length){
-				reply += `:thinking: Wow calmos t'as trop d'arguments là!`;
+				reply += `Wow calmos t'as trop d'arguments là!`;
 			}
 		}
 		if (!reply) {
 			for (var i = 0; command.args[i]; i++) {
 				if (command.args[i] == "int" && isNaN(args[i])) {
-					reply += `:thinking: Nombre **${args[i]}** invalide.`;
+					reply += `Nombre **${args[i]}** invalide.`;
 				} else if (command.args[i] == "mention" && !args[i].startsWith("<@") && !args[i].endsWith(">")) {
-					reply += `:thinking: Mention **${args[i]}** invalide.`;
+					reply += `Mention **${args[i]}** invalide.`;
 				} else if (command.args[i] == "role" && !args[i].startsWith("<@&") && !args[i].endsWith(">")) {
-					reply += `:thinking: Rôle **${args[i]}** invalide.`;
+					reply += `Rôle **${args[i]}** invalide.`;
 				}
 			}
 		}
 	}
 	if (!(reply === "")) {
 	 	if (command.usage) {
-			reply += `\n:thumbsup: Essaye plutôt ça : \`${prefix}${command.usage}\``;
+			reply += `\nEssaye plutôt ça : \`${prefix}${command.usage}\``;
 		}
 		return message.channel.send(reply);
 	}

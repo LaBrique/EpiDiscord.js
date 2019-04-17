@@ -23,8 +23,8 @@ module.exports = {
                     disp = "**" + res[event].acti_title + "**" + "\n" + data;
                     console.log("--------------------------")
                     console.log(res[event]);
+                    message.channel.send(disp);
                 }
-                message.channel.send(disp);
         });
     }
 }

@@ -12,8 +12,8 @@ module.exports = {
             .then(res => {
                 let disp = args.join(" ");
                 for (var proj in res) {
+                    console.log(res[proj].acti_title);
                     if (res[proj].acti_title == disp) {
-                        console.log(res[proj].acti_title);
                         console.log(`/module/${res[proj].scolaryear}/${res[proj].codemodule}/${res[proj].codeinstance}/${res[proj].codeacti}/project/register`);
                         intra.projects.register(res[proj], "test");
                     }
