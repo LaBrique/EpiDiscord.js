@@ -5,7 +5,8 @@ module.exports = {
 	category: 'Information',
 	name: 'projects',
 	description: 'Récupère des infos sur les projets',
-	usage:'projects',
+	usage: 'projects',
+    login: true,
 	execute(intra, message, args) {
         var date = new Date();
         var today = date.getFullYear() + "-" + months[date.getMonth()] + "-" + date.getDate();

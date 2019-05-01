@@ -3,8 +3,9 @@ module.exports = {
     category: 'Inscription',
     name: 'register',
     description: 'Inscrit à un projet',
-    usage:'register <projet>',
+    usage: 'register <projet>',
     arg: ['str'],
+    login: true,
     execute(intra, message, args) {
         var date = new Date();
         var today = date.getFullYear() + "-" + months[date.getMonth()] + "-" + date.getDate();

@@ -3,7 +3,8 @@ module.exports = {
 	category: 'Information',
 	name: 'planning',
 	description: 'Récupère des infos sur le planning',
-	usage:'planning',
+	usage: 'planning',
+    login: true,
 	execute(intra, message, args) {
         var disp = "";
         var date = new Date();
@@ -21,8 +22,8 @@ module.exports = {
                         register = "\t-Registered";
                     var data = register + "\n" + time
                     disp = "**" + res[event].acti_title + "**" + "\n" + data;
-                    console.log("--------------------------")
-                    console.log(res[event]);
+                    // console.log("--------------------------")
+                    // console.log(res[event]);
                     message.channel.send(disp);
                 }
         });

@@ -13,7 +13,7 @@ module.exports = {
 	category: 'Bot',
 	name: 'help',
 	description: 'Donne la liste des commandes ou des infos sur une commande en particulier.',
-	usage:`help\n${prefix}help <commande>`,
+	usage:`help [<commande>]`,
 	execute(intra, message, args) {
 
 		const data = [];
@@ -34,17 +34,19 @@ module.exports = {
 			return;
 		}
 
-		const name = args[0].toLowerCase();
+		const name = args[0];
 		const command = commands.get(name);
 
 		if (!command) {
-			return message.reply('that\'s not a valid command!');
+			return message.send('Je connais pas cette commande.');
 		}
 
 		data.push(`**Name:** ${command.name}`);
 
 		if (command.description) data.push(`**Description:** ${command.description}`);
 		if (command.usage) data.push(`**Usage:** \`${prefix}${command.usage}\``);
+        if (command.login) data.push(`:warning: **Cette commande nécessite d'avoir son compte lié!**`);
+        if (command.dm) data.push(`:warning: **Cette commande est disponible uniquement en DM!**`);
 
 		message.channel.send(data, { split: true });
 
