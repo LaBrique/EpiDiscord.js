@@ -14,7 +14,7 @@ module.exports = {
 	name: 'help',
 	description: 'Donne la liste des commandes ou des infos sur une commande en particulier.',
 	usage:`help [<commande>]`,
-	execute(intra, message, args) {
+	execute(profile, message, args) {
 
 		const data = [];
 		const { commands } = message.client;

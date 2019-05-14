@@ -4,19 +4,19 @@ module.exports = {
     name: 'register',
     description: 'Inscrit à un projet',
     usage: 'register <projet>',
-    arg: ['str'],
+    args: ['str'],
     login: true,
-    execute(intra, message, args) {
+    execute(profile, message, args) {
         var date = new Date();
         var today = date.getFullYear() + "-" + months[date.getMonth()] + "-" + date.getDate();
-        intra.projects.get({ startDate: today, endDate: today })
+        profile.intra.projects.get({ startDate: today, endDate: today })
             .then(res => {
                 let disp = args.join(" ");
                 for (var proj in res) {
                     console.log(res[proj].acti_title);
                     if (res[proj].acti_title == disp) {
                         console.log(`/module/${res[proj].scolaryear}/${res[proj].codemodule}/${res[proj].codeinstance}/${res[proj].codeacti}/project/register`);
-                        intra.projects.register(res[proj], "test");
+                        profile.intra.projects.register(res[proj], "test");
                     }
                 }
         });

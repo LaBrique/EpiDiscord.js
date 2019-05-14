@@ -8,10 +8,10 @@ module.exports = {
 	usage: 'module <scolarYear> <moduleCode> <instanceCode>',
     args: ['str', 'str', 'str'],
     login: true,
-	execute(intra, message, args) {
+	execute(profile, message, args) {
         var date = new Date();
         var today = date.getFullYear() + "-" + months[date.getMonth()] + "-" + date.getDate();
-        intra.units.get(args[0], args[1], args[2])
+        profile.intra.units.get(args[0], args[1], args[2])
         .then(res => {
             for (var mod in res) {
                 const embed = new Discord.RichEmbed()
@@ -21,7 +21,7 @@ module.exports = {
                     .addField("Registration:", res[mod].student_registered == "0" ? ":x:" : ":white_check_mark:")
                     .addField("Start:", `**${res[mod].begin}**`)
                     .addField("End:", `**${res[mod].end}**`);
-                message.channel.send({ embed });
+                message.channel.send(embed);
                 break;
             }
         });

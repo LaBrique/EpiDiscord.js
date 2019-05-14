@@ -6,6 +6,8 @@ const client = new Discord.Client();
 
 var Intras = new Map();
 module.exports = Intras;
+const Reminders = require('./reminders.js');
+const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -66,10 +68,10 @@ client.on('message', message => {
 	}
 
 	try {
-        let intra = command.login ? Intras.get(message.author) : {};
-        if (command.login && intra == undefined)
+        let profile = command.login ? Intras.get(message.author) : {};
+        if (command.login && (profile == undefined || profile.intra == undefined))
             return (message.channel.send("Cette commande nécessite d'avoir son compte lié.\n\`try: !help addUser\`"));
-		command.execute(intra, message, args);
+		command.execute(profile, message, args);
 	}
 	catch (error) {
 		console.error(error);
@@ -77,8 +79,7 @@ client.on('message', message => {
 	}
 });
 
-// setInterval(3600, () => {
-//
-// });
+setInterval(Reminders.projects, 86400000, Intras);
+setInterval(Reminders.planning, 3600000, Intras);
 
 client.login(token);
