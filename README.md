@@ -16,9 +16,8 @@ Créez un fichier nommé `config.json` à la racine du projet, remplissez le ave
 
 En remplaçant (prefix) par le préfix auquel vous souhaitez que le bot réponde, et (token) par le token du bot Discord que vous souhaitez incarner. Ne donnez à personne ce token!
 
-Éxécutez ensuite ces quelques commandes:
-`docker build .`
-À la fin de celle-ci, la dernière ligne devrait ressembler à `Successfully built (image)`
+Éxécutez ensuite `docker build .`.
+À la fin de celle-ci, la dernière ligne devrait ressembler à `Successfully built (image)`,
 (image) étant le code de votre nouvelle image.
 
 `docker tag [image] epidiscord.js`
