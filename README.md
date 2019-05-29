@@ -24,3 +24,5 @@ En remplaçant (prefix) par le préfix auquel vous souhaitez que le bot réponde
 `docker run -d epidiscord.js`
 
 Et voilà, votre bot tourne à l'intérieur d'un container Docker!
+
+Bot officiel: Projets#2082
