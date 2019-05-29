@@ -1,3 +1,4 @@
+const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 module.exports = {
     projects: function projects(Intras) {
         for (var [user, profile] of Intras) {
@@ -14,13 +15,14 @@ module.exports = {
                         console.log(acti);
                         let actiDay = Number(acti.end_register.slice(8, 10));
                         let actiMonth = Number(acti.end_register.slice(5, 7));
+                        let ok = false;
                         if (date.getMonth() == actiMonth)
                             if (date.getDay() == actiDay - 2)
-                                var ok = 1;
+                                ok = true;
                         else if (date.getMonth() == actiMonth - 1)
                             if (actiDay == 1 || actiDay == 2)
-                                var ok = 1;
-                        if (ok == 1 && !proj.registered) {
+                                ok = true;
+                        if (ok && !proj.registered) {
                             const embed = new Discord.RichEmbed()
                                 .setTitle(`**ATTENTION**`)
                                 .setColor(4886754)
@@ -59,19 +61,22 @@ module.exports = {
         }
     },
     planning: function planning (Intras) {
-        for (var [user, profile] of Intras) {
+        for (let [user, profile] of Intras) {
             if (!profile.subscriptions.planning) continue;
-            var date = new Date();
-            var today = date.getFullYear() + "-" + months[date.getMonth()] + "-" + date.getDate();
+            let date = new Date();
+            let today = date.getFullYear() + "-" + months[date.getMonth()] + "-" + date.getDate();
+            console.log(date);
             profile.intra.planning.get({ startDate: today, endDate: today })
             .then(res => {
-                for (let acti of res) {
-                    console.log(acti);
-                    let actiHour = Number(acti.start.slice(11, 13));
-                    let actiMin = Number(acti.start.slice(14, 16));
-                    if (date.getHours() == actiHour - 1)
-                    if (ok == 1 && acti.registered) {
-                        user.dmChannel.send(`L'activité ${acti.acti_title} démarre dans 1h${actiMin}.`);
+                for (let acti in res) {
+                    console.log(res[acti]);
+                    let actiHour = Number(res[acti].start.slice(11, 13));
+                    let actiMin = Number(res[acti].start.slice(14, 16));
+                    let ok = true;
+                    // if (date.getHours() + 2 == actiHour - 2)
+                    //     ok = true;
+                    if (ok && res[acti].event_registered) {
+                        user.dmChannel.send(`L'activité ${res[acti].acti_title} démarre dans ${actiMin != 0 ? (actiHour - date.getHours() - 1) : actiHour - date.getHours()}h00`);
                     }
                 }
             })

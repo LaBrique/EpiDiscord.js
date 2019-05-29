@@ -22,6 +22,10 @@ client.on('ready', () => {
 
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (message.content === "!forceRemind") {
+        Reminders.projects(Intras);
+        Reminders.planning(Intras);
+    }
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift();
